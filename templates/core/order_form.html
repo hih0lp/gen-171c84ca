@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Оформление заказа — Букетная Лавка{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h1 class="text-center mb-4">Оформить заказ букета</h1>
+            <p class="text-center text-muted mb-5">Заполните форму, и мы свяжемся с вами для подтверждения заказа в течение 15 минут.</p>
+            
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="{{ form.customer_name.id_for_label }}" class="form-label">{{ form.customer_name.label }}</label>
+                                {{ form.customer_name }}
+                                {% if form.customer_name.errors %}
+                                <div class="text-danger small">{{ form.customer_name.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{ form.phone.id_for_label }}" class="form-label">{{ form.phone.label }}</label>
+                                {{ form.phone }}
+                                {% if form.phone.errors %}
+                                <div class="text-danger small">{{ form.phone.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.address.id_for_label }}" class="form-label">{{ form.address.label }}</label>
+                            {{ form.address }}
+                            {% if form.address.errors %}
+                            <div class="text-danger small">{{ form.address.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.order_details.id_for_label }}" class="form-label">{{ form.order_details.label }}</label>
+                            {{ form.order_details }}
+                            <div class="form-text">Опишите состав букета, предпочтительные цветы, бюджет, особые пожелания.</div>
+                            {% if form.order_details.errors %}
+                            <div class="text-danger small">{{ form.order_details.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="{{ form.desired_datetime.id_for_label }}" class="form-label">{{ form.desired_datetime.label }}</label>
+                            {{ form.desired_datetime }}
+                            {% if form.desired_datetime.errors %}
+                            <div class="text-danger small">{{ form.desired_datetime.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>Отправить заказ
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <p class="text-muted">Или позвоните нам: <strong>+7 (999) 123-45-67</strong></p>
+                <a href="{% url 'home' %}" class="btn btn-outline-secondary">Вернуться на главную</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
