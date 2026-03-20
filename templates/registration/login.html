@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход в админ-панель{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4"><i class="fas fa-lock me-2"></i>Вход для администратора</h2>
+                    
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        Неверное имя пользователя или пароль.
+                    </div>
+                    {% endif %}
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="id_username" class="form-label">Имя пользователя</label>
+                            <input type="text" name="username" class="form-control" id="id_username" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="id_password" class="form-label">Пароль</label>
+                            <input type="password" name="password" class="form-control" id="id_password" required>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Войти</button>
+                        </div>
+                    </form>
+                    
+                    <hr class="my-4">
+                    
+                    <p class="text-center text-muted small">Данные для входа по умолчанию:<br>Логин: <strong>admin</strong> | Пароль: <strong>admin</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
